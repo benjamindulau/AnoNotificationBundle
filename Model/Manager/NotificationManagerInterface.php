@@ -19,17 +19,10 @@ use Ano\Bundle\NotificationBundle\Model\Notification;
 interface NotificationManagerInterface
 {
     /**
-     * Factory to create Notification instance
-     *
-     * @return Notification
-     */
-    public function createNotificationInstance();
-
-    /**
      * Creates a new notification
      *
      * @param  Notification  $notification
      * @return boolean
      */
-    public function createNotification(Notification $notification);
+    public function addNotification(Notification $notification);
 }

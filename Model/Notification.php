@@ -9,15 +9,21 @@
 
 namespace Ano\Bundle\NotificationBundle\Model;
 
+use Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface;
+use Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface;
+use Ano\Bundle\NotificationBundle\Model\Notification;
 use DateTime;
 
 abstract class Notification
 {
-    /* @var NotifiableInterface $target */
-    protected $target;
+    /* @var NotificationSubjectInterface $target */
+    protected $subject;
 
     /* @var NotificationSubscriberInterface */ 
     protected $recipient;
+
+    /* @var NotificationSubscriberInterface */
+    protected $notifier;
 
     /* @var string */
     protected $message;
@@ -30,13 +36,15 @@ abstract class Notification
 
 
     public function __construct(
-        NotifiableInterface $target = null,
+        NotificationSubscriberInterface $notifier = null,
         NotificationSubscriberInterface $recipient = null,
+        NotificationSubjectInterface $subject = null,
         $message = null)
     {
         $this->createdAt = new DateTime();
-        $this->setTarget($target);
+        $this->setNotifier($notifier);
         $this->setRecipient($recipient);
+        $this->setSubject($subject);
         $this->setMessage($message);
     }
 
@@ -104,21 +112,6 @@ abstract class Notification
         return $this->recipient;
     }
 
-    /**
-     * @param NotifiableInterface $target
-     */
-    public function setTarget(NotifiableInterface $target)
-    {
-        $this->target = $target;
-    }
-
-    /**
-     * @return NotifiableInterface
-     */
-    public function getTarget()
-    {
-        return $this->target;
-    }
 
     public function markRead()
     {
@@ -136,5 +129,37 @@ abstract class Notification
     public function isRead()
     {
         return (null !== $this->readAt);
+    }
+
+    /**
+     * @param \Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface $notifier
+     */
+    public function setNotifier(NotificationSubjectInterface $notifier)
+    {
+        $this->notifier = $notifier;
+    }
+
+    /**
+     * @return \Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface
+     */
+    public function getNotifier()
+    {
+        return $this->notifier;
+    }
+
+    /**
+     * @param \Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface $subject
+     */
+    public function setSubject(NotificationSubjectInterface $subject)
+    {
+        $this->subject = $subject;
+    }
+
+    /**
+     * @return \Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface
+     */
+    public function getSubject()
+    {
+        return $this->subject;
     }
 }

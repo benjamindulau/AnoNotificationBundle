@@ -2,6 +2,7 @@
 
 namespace Ano\Bundle\NotificationBundle\Model;
 
+
 interface NotificationSubscriberInterface
 {
     /**
@@ -12,5 +13,10 @@ interface NotificationSubscriberInterface
     /***
      * @return boolean
      */
-    public function wantsNotificationFor($targetName);
+    public function wantsNotificationFor($subjectName);
+
+    /**
+     * @return array
+     */
+    public function getNotifierList();
 }
