@@ -19,4 +19,9 @@ interface NotificationSubscriberInterface
      * @return array
      */
     public function getNotifierList();
+
+    /**
+     * @return string
+     */
+    public function getNotifierName();
 }

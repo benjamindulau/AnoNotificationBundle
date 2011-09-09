@@ -44,7 +44,9 @@ abstract class Notification
         $this->createdAt = new DateTime();
         $this->setNotifier($notifier);
         $this->setRecipient($recipient);
-        $this->setSubject($subject);
+        if (null !== $subject) {
+            $this->setSubject($subject);
+        }
         $this->setMessage($message);
     }
 
@@ -134,7 +136,7 @@ abstract class Notification
     /**
      * @param \Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface $notifier
      */
-    public function setNotifier(NotificationSubjectInterface $notifier)
+    public function setNotifier(NotificationSubscriberInterface $notifier)
     {
         $this->notifier = $notifier;
     }
