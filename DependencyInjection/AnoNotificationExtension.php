@@ -32,7 +32,7 @@ class AnoNotificationExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach (array('notifier', 'repository') as $basename) {
+        foreach (array('model', 'notifier', 'repository') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
     }

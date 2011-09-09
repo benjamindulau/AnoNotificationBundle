@@ -1,21 +1,27 @@
 <?php
 
-namespace Ano\Bundle\NotificationBundle\Manager;
+namespace Ano\Bundle\NotificationBundle\Model\Manager;
 
-use Ano\Bundle\NotificationBundle\Model\Manager\NotificationManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Ano\Bundle\NotificationBundle\Repository\NotificationRepositoryInterface;
 use Ano\Bundle\NotificationBundle\Notifier\NotifierInterface;
 use Ano\Bundle\NotificationBundle\Model\Notification;
+use Ano\Bundle\NotificationBundle\AnoNotificationEvents;
+use Ano\Bundle\NotificationBundle\Event\NotificationEvent;
 
 class NotificationManager implements  NotificationManagerInterface
 {
     protected $notificationRepository;
-
     protected $notifiers = array();
+    protected $dispatcher;
 
-    public function __construct(NotificationRepositoryInterface $notificationRepository)
+    public function __construct(
+        NotificationRepositoryInterface $notificationRepository,
+        EventDispatcherInterface $dispatcher
+    )
     {
         $this->notificationRepository = $notificationRepository;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -28,11 +34,14 @@ class NotificationManager implements  NotificationManagerInterface
         if ($recipient->wantsNotificationFor($subject->getNotificationSubjectName())) {
             $this->notificationRepository->save($notification);
 
-            foreach ($recipient->getNotifierList() as $notifierName) {
-                if ($this->hasNotifier($notifierName)) {
-                    $this->notifiers[$notifierName]->notify($notification);
-                }
-            }
+            $event = new NotificationEvent($notification, $notification->getNotifier(), $recipient);
+            $this->dispatcher->dispatch(AnoNotificationEvents::POST_SAVE, $event);
+
+//            foreach ($recipient->getNotifierList() as $notifierName) {
+//                if ($this->hasNotifier($notifierName)) {
+//                    $this->notifiers[$notifierName]->notify($notification);
+//                }
+//            }
         }
     }
 
