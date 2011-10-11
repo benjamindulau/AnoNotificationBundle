@@ -7,6 +7,7 @@
     <mapped-superclass name="Ano\Bundle\NotificationBundle\Model\Notification">
 
         <field name="message" column="message" type="text" />
+        <field name="threadId" column="thread_id" type="string" length="255" nullable="true" />
         <field name="readAt" column="read_at" type="datetime" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime" />
         

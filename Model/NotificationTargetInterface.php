@@ -2,12 +2,12 @@
 
 namespace Ano\Bundle\NotificationBundle\Model;
 
-interface NotificationSubjectInterface
+interface NotificationTargetInterface
 {
     /**
      * @return void
      */
-    public function getNotificationSubjectName();
+    public function getNotificationTargetName();
 
     /**
      * @return integer

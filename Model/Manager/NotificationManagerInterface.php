@@ -9,6 +9,8 @@
 
 namespace Ano\Bundle\NotificationBundle\Model\Manager;
 
+use Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface;
+use Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface;
 use Ano\Bundle\NotificationBundle\Model\Notification;
 
 /**

@@ -9,17 +9,17 @@
 
 namespace Ano\Bundle\NotificationBundle\Model;
 
-use Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface;
+use Ano\Bundle\NotificationBundle\Model\NotificationTargetInterface;
 use Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface;
 use Ano\Bundle\NotificationBundle\Model\Notification;
 use DateTime;
 
 abstract class Notification
 {
-    /* @var NotificationSubjectInterface $target */
-    protected $subject;
+    /* @var NotificationTargetInterface */
+    protected $target;
 
-    /* @var NotificationSubscriberInterface */ 
+    /* @var NotificationSubscriberInterface */
     protected $recipient;
 
     /* @var NotificationSubscriberInterface */
@@ -27,6 +27,9 @@ abstract class Notification
 
     /* @var string */
     protected $message;
+
+    /* @var string */
+    protected $threadId;
 
     /* @var \DateTime */
     protected $readAt;
@@ -38,15 +41,13 @@ abstract class Notification
     public function __construct(
         NotificationSubscriberInterface $notifier = null,
         NotificationSubscriberInterface $recipient = null,
-        NotificationSubjectInterface $subject = null,
+        $threadId = null,
         $message = null)
     {
         $this->createdAt = new DateTime();
         $this->setNotifier($notifier);
         $this->setRecipient($recipient);
-        if (null !== $subject) {
-            $this->setSubject($subject);
-        }
+        $this->setThreadId($threadId);
         $this->setMessage($message);
     }
 
@@ -134,7 +135,7 @@ abstract class Notification
     }
 
     /**
-     * @param \Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface $notifier
+     * @param NotificationSubscriberInterface $notifier
      */
     public function setNotifier(NotificationSubscriberInterface $notifier)
     {
@@ -142,7 +143,7 @@ abstract class Notification
     }
 
     /**
-     * @return \Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface
+     * @return NotificationSubscriberInterface
      */
     public function getNotifier()
     {
@@ -150,18 +151,34 @@ abstract class Notification
     }
 
     /**
-     * @param \Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface $subject
+     * @param string $threadId
      */
-    public function setSubject(NotificationSubjectInterface $subject)
+    public function setThreadId($threadId)
     {
-        $this->subject = $subject;
+        $this->threadId = $threadId;
     }
 
     /**
-     * @return \Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface
+     * @return string
      */
-    public function getSubject()
+    public function getThreadId()
     {
-        return $this->subject;
+        return $this->threadId;
+    }
+
+    /**
+     * @param NotificationTargetInterface $target
+     */
+    public function setTarget(NotificationTargetInterface $target)
+    {
+        $this->target = $target;
+    }
+
+    /**
+     * @return NotificationTargetInterface
+     */
+    public function getTarget()
+    {
+        return $this->target;
     }
 }

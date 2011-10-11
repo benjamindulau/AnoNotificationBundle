@@ -13,7 +13,7 @@ interface NotificationSubscriberInterface
     /***
      * @return boolean
      */
-    public function wantsNotificationFor($subjectName);
+    public function wantsNotificationFor($threadId);
 
     /**
      * @return array
