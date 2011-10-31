@@ -6,8 +6,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Ano\Bundle\NotificationBundle\Repository\NotificationRepositoryInterface;
 use Ano\Bundle\NotificationBundle\Notifier\NotifierInterface;
 use Ano\Bundle\NotificationBundle\Model\Notification;
-use Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface;
-use Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface;
 use Ano\Bundle\NotificationBundle\AnoNotificationEvents;
 use Ano\Bundle\NotificationBundle\Event\NotificationEvent;
 

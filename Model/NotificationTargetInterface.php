@@ -5,7 +5,7 @@ namespace Ano\Bundle\NotificationBundle\Model;
 interface NotificationTargetInterface
 {
     /**
-     * @return void
+     * @return string
      */
     public function getNotificationTargetName();
 
@@ -15,7 +15,7 @@ interface NotificationTargetInterface
     public function getUnreadNotificationCount();
 
     /**
-     * @return integer
+     * @param integer $count
      */
-    public function setUnreadNotificationCount();
+    public function setUnreadNotificationCount($count);
 }
