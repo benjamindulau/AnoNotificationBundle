@@ -2,6 +2,7 @@
 
 namespace Ano\Bundle\NotificationBundle\Model;
 
+use Ano\Bundle\NotificationBundle\Model\Notification;
 
 interface NotificationSubscriberInterface
 {
@@ -24,4 +25,24 @@ interface NotificationSubscriberInterface
      * @return string
      */
     public function getNotifierName();
+
+    /**
+     * @return void
+     */
+    public function incUnreadNotificationCount(Notification $notification);
+
+    /**
+     * @return void
+     */
+    public function decUnreadNotificationCount(Notification $notification);
+
+    /**
+     * @return integer
+     */
+    public function getUnreadNotificationCount();
+
+    /**
+     * @return boolean
+     */
+    public function hasUnreadNotifications();
 }

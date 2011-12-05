@@ -33,6 +33,7 @@ class NotificationManager implements  NotificationManagerInterface
         $thread = $notification->getThreadId();
         $recipient = $notification->getRecipient();
         if ($recipient->wantsNotificationFor($thread)) {
+            $recipient->incUnreadNotificationCount($notification);
             $this->notificationRepository->save($notification);
 
             $event = new NotificationEvent($notification, $notification->getNotifier(), $recipient);
