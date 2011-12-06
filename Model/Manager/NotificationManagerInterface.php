@@ -10,7 +10,7 @@
 namespace Ano\Bundle\NotificationBundle\Model\Manager;
 
 use Ano\Bundle\NotificationBundle\Model\NotificationSubscriberInterface;
-use Ano\Bundle\NotificationBundle\Model\NotificationSubjectInterface;
+use Ano\Bundle\NotificationBundle\Model\NotificationTargetInterface;
 use Ano\Bundle\NotificationBundle\Model\Notification;
 
 /**
@@ -27,4 +27,10 @@ interface NotificationManagerInterface
      * @return boolean
      */
     public function addNotification(Notification $notification);
+
+    /**
+     * Marks the notifications as read for the given target
+     * @param NotificationTargetInterface $target
+     */
+    public function readNotifications(NotificationSubscriberInterface $subscriber, NotificationTargetInterface $target = null);
 }

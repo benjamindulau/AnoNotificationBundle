@@ -11,6 +11,7 @@
     <services>
         <service id="ano_notification.repository.notification" class="%ano_notification.repository.notification.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%ano_notification.model.notification.class%</argument>
         </service>
     </services>
     

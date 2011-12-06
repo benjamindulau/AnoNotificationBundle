@@ -10,6 +10,7 @@
 namespace Ano\Bundle\NotificationBundle\DependencyInjection;
 
 use Ano\Bundle\SystemBundle\DependencyInjection\Extension;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -30,10 +31,19 @@ class AnoNotificationExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $processor = new Processor();
+        $configuration = new Configuration();
+
+        $config = $processor->processConfiguration($configuration, $configs);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         foreach (array('model', 'notifier', 'repository') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
+
+        $this->remapParametersNamespaces($config['class'], $container, array(
+            'model'         => 'ano_notification.model.%s.class',
+        ));
     }
 }
