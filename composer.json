@@ -1,0 +1,26 @@
+{
+    "name":         "ano/notification-bundle",
+    "description":  "Anonymation notification bundle",
+    "keywords":     ["notification"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name":     "Benjamin Dulau",
+            "email":    "benjamin.dulau@anonymation.com",
+            "homepage": "http://www.anonymation.com"
+        }
+    ],
+    "require": {
+        "ano/system-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "Ano\\Bundle\\NotificationBundle": "" }
+    },
+    "target-dir": "Ano/Bundle/NotificationBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
