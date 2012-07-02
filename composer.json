@@ -12,15 +12,10 @@
         }
     ],
     "require": {
-        "ano/system-bundle": "*"
+        "ano/system-bundle": "1.0.x-dev"
     },
     "autoload": {
         "psr-0": { "Ano\\Bundle\\NotificationBundle": "" }
     },
-    "target-dir": "Ano/Bundle/NotificationBundle",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    }
+    "target-dir": "Ano/Bundle/NotificationBundle"
 }
